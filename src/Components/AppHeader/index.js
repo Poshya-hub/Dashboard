@@ -1,11 +1,16 @@
 import p from '../../Images/P.png';
 import { MailOutlined, BellFilled } from '@ant-design/icons';
-import { Image, Typography, Space, Badge, ColorPicker } from 'antd';
-import { useContext } from "react";
+import { Image, Typography, Space, Badge, ColorPicker, Drawer, List, notification } from 'antd';
+import { useState, useContext, useEffect } from "react";
 import { DataContext } from '../../App';
+import { getComments, getOrders } from '../../API';
 
 function AppHeader() {
     const { setColor } = useContext(DataContext);
+    const [comments, setComments] = useState([]);
+    const [orders, setOrders] = useState([]);
+    const [commentsOpen, setCommentsOpen] = useState(false);
+    const [notificationsOpen, setNotificationsOpen] = useState(false);
 
     const handleColorChange = (color) => {
         if (color) {
@@ -15,6 +20,15 @@ function AppHeader() {
             console.log("Color object is undefined or does not have a hex property");
         }
     };
+
+    useEffect(() => {
+        getComments().then(res => {
+            setComments(res.comments)
+        })
+        getOrders().then(res => {
+            setOrders(res.products)
+        })
+    })
 
     return (
         <div className="AppHeader">
@@ -27,13 +41,42 @@ function AppHeader() {
             </Typography.Title>
             <Space>
                 <ColorPicker size='small' onChange={handleColorChange} />
-                <Badge count={10} dot>
-                    <MailOutlined style={{ fontSize: 24 }} />
+                <Badge count={comments.length} dot>
+                    <MailOutlined style={{ fontSize: 24 }} onClick={() => {
+                        setCommentsOpen(true)
+                    }}/>
                 </Badge>
-                <Badge count={20}>
-                    <BellFilled style={{ fontSize: 24 }} />
+                <Badge count={orders.length} >
+                    <BellFilled style={{ fontSize: 24 }} onClick={() => {
+                        setNotificationsOpen(true)
+                    }}/>
                 </Badge>
             </Space>
+            <Drawer title="Comments" open={commentsOpen} onClose={() => {
+                setCommentsOpen(false)
+                }} 
+                maskClosable 
+            >
+                <List dataSource={comments} renderItem={(item) => {
+                    return <List.Item>{item.body}</List.Item>
+                }}></List>
+            </Drawer>
+            <Drawer title="Notifications" open={notificationsOpen} onClose={() => {
+                setNotificationsOpen(false)
+            }} 
+            maskClosable
+            >
+                <List dataSource={orders} renderItem={(item) => {
+                    return (
+                        <List.Item>
+                            <Typography.Text strong>
+                                {item.title} 
+                            </Typography.Text>
+                            &nbsp;has been ordered!
+                        </List.Item>
+                    )
+                }}></List>
+            </Drawer>
         </div>
     );
 }
