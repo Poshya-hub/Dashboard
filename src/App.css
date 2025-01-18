@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 .App{
   display: flex;
@@ -97,9 +98,14 @@
 
 /* Small mobile devices */
 @media screen and (max-width: 600px) {
-
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
   .SideMenuVertical {
-    min-width: unset;
+    width: 50px;
+    height: 1200px;
   }
   .table-container{
     width:100px;
@@ -108,8 +114,16 @@
     font-size: 20px;
   }
   .cards{
-    flex-direction: column;
     align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
   }
+  .chart{
+    width:340px
+  }
+  .PageContent{
+    padding: 10px 0px !important;
+  }
+
 }
 
