@@ -36,9 +36,9 @@ function AppHeader() {
                 width={50}
                 src={p}
             />
-            <Typography.Title type="secondary">
+            <div type="secondary" strong className="appHeaderText">
                 DASHBOARD
-            </Typography.Title>
+            </div>
             <Space>
                 <ColorPicker size='small' onChange={handleColorChange} />
                 <Badge count={comments.length} dot>

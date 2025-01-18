@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 .App{
   display: flex;
   flex-direction: column;
@@ -21,7 +27,6 @@
 }
 .SideMenuAndPageContent{
   display: flex;
-  flex: 1;
   justify-content: flex-start;
   align-items: flex-start;
 }
@@ -31,10 +36,85 @@
 }
 .SideMenuVertical{
   height:calc(100vh - 100px);
+  border-radius: 2px;
 }
 .PageContent{
   padding-left: 12px;
 }
-.AppFooter{
-  
+.cards{
+  flex-wrap: wrap;
 }
+.chart{
+  width:500px;
+  height:300px;
+}
+.appHeaderText{
+  font-size: 38px;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+
+  .SideMenu {
+    position: relative;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .SideMenuVertical {
+    min-width: unset;
+  }
+
+  .SideMenu{
+    padding: 5px;
+  }
+  .recentOrderAndChart{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .PageContent {
+    padding: 15px !important;
+  }
+
+  .table-container {
+    padding: 1px;
+  }
+  .chart{
+    width:450px;
+    height:250px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+
+  .recentOrderAndChart{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .PageContent{
+    padding-top: 10px;
+  }
+}
+
+/* Small mobile devices */
+@media screen and (max-width: 600px) {
+
+  .SideMenuVertical {
+    min-width: unset;
+  }
+  .table-container{
+    width:100px;
+  }
+  .appHeaderText{
+    font-size: 20px;
+  }
+  .cards{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+

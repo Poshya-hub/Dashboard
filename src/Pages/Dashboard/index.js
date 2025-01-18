@@ -48,7 +48,7 @@ function Dashboard() {
     return(
         <Space size={20} direction="vertical">
             <Typography.Title level={4}>Dashboard</Typography.Title>
-            <Space direction="horizontal">
+            <Space direction="horizontal" className="cards">
                 <DashboardCard 
                     icon={
                     <ShoppingCartOutlined 
@@ -57,7 +57,7 @@ function Dashboard() {
                             backgroundColor:'rgba(0,255,0,0.25)', 
                             borderRadius:20,
                             fontSize: 24,
-                            padding: 8
+                            padding: 8,
                             }}
                         />
                     }
@@ -110,7 +110,7 @@ function Dashboard() {
                     value={revenue} 
                 />
             </Space>
-            <Space>
+            <Space className="recentOrderAndChart">
                 <RecentOrder />
                 <DashboardChart/>
             </Space>
@@ -143,7 +143,7 @@ function RecentOrder(){
 
     return (
         <>
-            <Typography.Text strong style={{padding: '10px !important'}}>Recent Orders</Typography.Text>
+            <Typography.Text strong className="table" style={{padding: '10px !important'}}>Recent Orders</Typography.Text>
             <Table 
                 columns={[
                     {
@@ -212,7 +212,7 @@ function DashboardChart(){
 
   const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-    return <Card style={{width:500, height:300}}>
+    return <Card className="chart">
                 <Bar options={options} data={revenueData} />
             </Card>
 }
